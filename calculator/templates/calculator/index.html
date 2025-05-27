@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #4e54c8;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #4e54c8;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #3c41b0;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Simple Calculator</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="number" step="any" name="num1" placeholder="Enter first number" required>
+            <input type="number" step="any" name="num2" placeholder="Enter second number" required>
+            <select name="operation" required>
+                <option value="" disabled selected>Select operation</option>
+                <option value="add">Addition (+)</option>
+                <option value="subtract">Subtraction (−)</option>
+                <option value="multiply">Multiplication (×)</option>
+                <option value="divide">Division (÷)</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result is not None %}
+            <div class="result">Result: {{ result }}</div>
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; {{ now|default:"2025" }} KAFAN Digitals. All rights reserved.
+    </footer>
+</body>
+</html>
